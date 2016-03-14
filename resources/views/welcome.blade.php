@@ -7,6 +7,7 @@
     </head>
     <body>
         <div class="container col-lg-4 col-md-offset-4">
+            <div><h2>Insert your Product Here</h2></div>
 
             <div class="add_product">
 
