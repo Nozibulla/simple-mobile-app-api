@@ -13,7 +13,7 @@ class ProductController extends Controller {
 
 		$request->thumbnail->move('thumbnail-image', $name);
 
-		$destinationPath = '/thumbnail-image/' . $name;
+		$destinationPath = 'optimumccl.com/eboimela/thumbnail-image/' . $name;
 
 		$product = new Product;
 
