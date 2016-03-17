@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration {
 			$table->increments('id');
 			$table->string('product_name');
 			$table->string('writer');
-			$table->string('category');
 			$table->string('thumbnail');
 			$table->timestamps();
 		});
@@ -33,6 +32,20 @@ class CreateUsersTable extends Migration {
 			$table->string('name');
 			$table->timestamps();
 		});
+
+		Schema::create('category_product', function (Blueprint $table) {
+
+			$table->integer('category_id')->unsigned()->index();
+
+			$table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
+			$table->integer('product_id')->unsigned()->index();
+
+			$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+			$table->timestamps();
+		});
+
 	}
 
 	/**
@@ -44,5 +57,6 @@ class CreateUsersTable extends Migration {
 		Schema::drop('users');
 		Schema::drop('products');
 		Schema::drop('categories');
+		Schema::drop('category_product');
 	}
 }

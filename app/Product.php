@@ -12,4 +12,9 @@ class Product extends Model {
 		'category',
 		'thumbnail',
 	];
+
+	public function categories() {
+
+		return $this->belongsToMany('App\Category')->withTimestamps();
+	}
 }

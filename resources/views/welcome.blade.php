@@ -27,8 +27,8 @@
                             </div>
 
                             <div class="form-group @if($errors->first('category')) has-error @endif">
-                                {!! Form::label('category', 'Category') !!}
-                                {!! Form::text('category', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                                {!! Form::label('category', 'Input label') !!}
+                                {!! Form::select('category[]', $categories, null, ['id' => 'category', 'class' => 'form-control', 'required' => 'required', 'multiple']) !!}
                                 <small class="text-danger">{{ $errors->first('category') }}</small>
                             </div>
 

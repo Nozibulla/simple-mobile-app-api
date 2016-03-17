@@ -15,7 +15,9 @@ class ProductController extends Controller {
 
 	public function addProduct() {
 
-		return view('welcome');
+		$categories = Category::lists('name', 'id');
+
+		return view('welcome', compact('categories'));
 	}
 
 	public function save(Request $request) {
@@ -32,11 +34,15 @@ class ProductController extends Controller {
 
 		$product->writer = $request->writer;
 
-		$product->category = $request->category;
+		//$product->category = $request->category;
 
 		$product->thumbnail = $destinationPath;
 
 		$product->save();
+
+		$category = $request->input('category');
+
+		$product->categories()->attach($category);
 
 	}
 
