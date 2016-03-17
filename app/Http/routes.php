@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Routes File
+| Routes File REST API
 |--------------------------------------------------------------------------
 |
 | Here is where you will register all of the routes in an application.
@@ -10,7 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
  */
-Route::get('lara-api/products', 'ProductController@show');
+
+Route::get('lara-api/products', 'ApiController@show');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -22,12 +24,18 @@ Route::get('lara-api/products', 'ProductController@show');
 |
  */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => 'web'], function () {
+	Route::auth();
 
 	Route::get('/', function () {
-		return view('welcome');
+		return 'Eboimelabd';
 	});
 
+	Route::get('/home', 'HomeController@index');
 	Route::post('/save_product', 'ProductController@save');
-
+	Route::get('/add_product', 'ProductController@addProduct');
+	Route::get('/add_category', 'ProductController@addCategory');
+	Route::post('/save_category', 'ProductController@saveCategory');
+	Route::post('/save_edited_category', 'ProductController@saveEditedCategory');
+	Route::post('/deletecategory', 'ProductController@deleteCategory');
 });

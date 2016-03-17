@@ -1,0 +1,4 @@
+
+
+ {{ Html::image($products->thumbnail) }}
+

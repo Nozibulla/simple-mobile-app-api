@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller {
+
+	public function __construct() {
+
+		$this->middleware('auth');
+	}
+
+	public function addProduct() {
+
+		return view('welcome');
+	}
 
 	public function save(Request $request) {
 
@@ -13,7 +24,7 @@ class ProductController extends Controller {
 
 		$request->thumbnail->move('thumbnail-image', $name);
 
-		$destinationPath = 'optimumccl.com/eboimela/thumbnail-image/' . $name;
+		$destinationPath = 'http://eboimela.optimumccl.com/thumbnail-image/' . $name;
 
 		$product = new Product;
 
@@ -29,10 +40,43 @@ class ProductController extends Controller {
 
 	}
 
-	public function show() {
+	public function addCategory() {
 
-		$products = Product::all();
+		$categories = Category::paginate(20);
 
-		return $products;
+		return view('add_category', compact('categories'));
+
 	}
+
+	public function saveCategory(Request $request) {
+
+		$category = new Category;
+
+		$category->name = $request->category;
+
+		$category->save();
+
+	}
+
+	public function saveEditedCategory(Request $request) {
+
+		$id = $request->id;
+
+		$category = Category::findOrFail($id);
+
+		$category->name = $request->name;
+
+		$category->save();
+	}
+
+	public function deleteCategory(Request $request) {
+
+		$id = $request->id;
+
+		$category = Category::findOrFail($id);
+
+		$category->delete();
+
+	}
+
 }
