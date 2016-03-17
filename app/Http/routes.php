@@ -11,7 +11,8 @@
 |
  */
 
-Route::get('lara-api/products', 'ApiController@show');
+Route::get('lara-api/products', 'ApiController@products');
+Route::get('lara-api/categories', 'ApiController@categories');
 
 /*
 |--------------------------------------------------------------------------

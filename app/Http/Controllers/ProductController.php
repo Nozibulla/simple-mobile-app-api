@@ -40,9 +40,9 @@ class ProductController extends Controller {
 
 		$product->save();
 
-		$category = $request->input('category');
+		$categoryIds = $request->input('category');
 
-		$product->categories()->attach($category);
+		$product->categories()->attach($categoryIds);
 
 	}
 

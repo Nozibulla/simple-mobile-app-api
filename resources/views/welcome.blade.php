@@ -27,15 +27,14 @@
                             </div>
 
                             <div class="form-group @if($errors->first('category')) has-error @endif">
-                                {!! Form::label('category', 'Input label') !!}
-                                {!! Form::select('category[]', $categories, null, ['id' => 'category', 'class' => 'form-control', 'required' => 'required', 'multiple']) !!}
+                                {!! Form::label('category', 'Select Categories') !!}
+                                {!! Form::select('category[]', $categories, null, ['id' => 'category_id', 'class' => 'form-control', 'required' => 'required', 'multiple']) !!}
                                 <small class="text-danger">{{ $errors->first('category') }}</small>
                             </div>
 
                             <div class="form-group @if($errors->first('thumbnail')) has-error @endif">
                                 {!! Form::label('thumbnail', 'Book Thumbnail') !!}
                                 {!! Form::file('thumbnail', ['required' => 'required']) !!}
-                                <p class="help-block">Help block text</p>
                                 <small class="text-danger">{{ $errors->first('thumbnail') }}</small>
                             </div>
 
@@ -54,3 +53,15 @@
     </div>
 </div>
 @endsection
+
+@section('footer')
+
+    <script type="text/javascript">
+
+        $('#category_id').select2();
+
+    </script>
+
+@endsection
+
+
