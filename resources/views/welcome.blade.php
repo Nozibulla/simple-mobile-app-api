@@ -26,6 +26,12 @@
                                 <small class="text-danger">{{ $errors->first('writer') }}</small>
                             </div>
 
+                            <div class="form-group @if($errors->first('book_link')) has-error @endif">
+                                {!! Form::label('book_link', 'Book Link') !!}
+                                {!! Form::text('book_link', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                                <small class="text-danger">{{ $errors->first('book_link') }}</small>
+                            </div>
+
                             <div class="form-group @if($errors->first('category')) has-error @endif">
                                 {!! Form::label('category', 'Select Categories') !!}
                                 {!! Form::select('category[]', $categories, null, ['id' => 'category_id', 'class' => 'form-control', 'required' => 'required', 'multiple']) !!}

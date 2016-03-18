@@ -30,11 +30,13 @@ class ProductController extends Controller {
 
 		$product = new Product;
 
-		$product->product_name = $request->product_name;
+		$product->book_name = $request->product_name;
 
 		$product->writer = $request->writer;
 
-		//$product->category = $request->category;
+		$product->book_link = $request->book_link;
+
+		$product->writer_on_linkbar = $this->makeTheTitleLink(strip_tags($request->writer));
 
 		$product->thumbnail = $destinationPath;
 
@@ -82,6 +84,20 @@ class ProductController extends Controller {
 		$category = Category::findOrFail($id);
 
 		$category->delete();
+
+	}
+
+	public function makeTheTitleLink($link_to_convert) {
+
+		$converted_Link = strtolower($link_to_convert);
+
+		$converted_Link = preg_replace("/[^a-z0-9_\s-]/", "", $converted_Link);
+
+		$converted_Link = preg_replace("/[\s-]+/", " ", $converted_Link);
+
+		$converted_Link = preg_replace("/[\s_]/", "-", $converted_Link);
+
+		return $converted_Link;
 
 	}
 

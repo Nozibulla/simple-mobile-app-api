@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->increments('id');
 			$table->string('book_name');
 			$table->string('writer');
+			$table->string('writer_on_linkbar');
 			$table->string('book_link');
 			$table->string('thumbnail');
 			$table->timestamps();
@@ -31,6 +32,7 @@ class CreateUsersTable extends Migration {
 		Schema::create('categories', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
+			$table->string('name_on_linkbar');
 			$table->timestamps();
 		});
 

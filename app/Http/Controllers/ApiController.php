@@ -57,7 +57,7 @@ class ApiController extends Controller {
 
 	public function writers() {
 
-		$writers = Product::distinct()->pluck('writer');
+		$writers = Product::distinct()->pluck('writer', 'writer_on_linkbar');
 
 		return $writers;
 
@@ -67,7 +67,7 @@ class ApiController extends Controller {
 
 		$writer = $request->writer_name;
 
-		$products = Product::wherewriter($writer)->get();
+		$products = Product::wherewriter_on_linkbar($writer)->get();
 
 		return $products;
 	}
