@@ -21,8 +21,9 @@ class CreateUsersTable extends Migration {
 
 		Schema::create('products', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('product_name');
+			$table->string('book_name');
 			$table->string('writer');
+			$table->string('book_link');
 			$table->string('thumbnail');
 			$table->timestamps();
 		});

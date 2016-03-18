@@ -11,8 +11,12 @@
 |
  */
 
-Route::get('lara-api/products', 'ApiController@products');
+Route::get('lara-api/books', 'ApiController@products');
 Route::get('lara-api/categories', 'ApiController@categories');
+Route::get('lara-api/category/{cat_name}', 'ApiController@productByCategorie');
+Route::get('lara-api/writers', 'ApiController@writers');
+Route::get('lara-api/writer/{writer_name}', 'ApiController@productsByWriter');
+Route::get('lara-api/categorieswithproducts', 'ApiController@categoriesWithProducts');
 
 /*
 |--------------------------------------------------------------------------
