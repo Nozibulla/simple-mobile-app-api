@@ -62,6 +62,8 @@ class ProductController extends Controller {
 
 		$category->name = $request->category;
 
+		$category->name_on_linkbar = $this->makeTheTitleLink(strip_tags($request->category));
+
 		$category->save();
 
 	}

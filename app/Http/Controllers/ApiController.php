@@ -46,7 +46,7 @@ class ApiController extends Controller {
 
 		$category_name = $request->cat_name;
 
-		$categories = Category::wherename($category_name)->get();
+		$categories = Category::wherename_on_linkbar($category_name)->get();
 
 		foreach ($categories as $category) {
 
