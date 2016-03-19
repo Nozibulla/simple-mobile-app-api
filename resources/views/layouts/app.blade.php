@@ -50,11 +50,13 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
 
-                    <li><a href="{{ url('/home') }}">DashBoard</a></li><li>
+                    <li><a href="{{ url('/home') }}">DashBoard</a></li>
 
-                    <a href="{{ url('/add_product') }}">Add Product</a></li><li>
+                    <li><a href="{{ url('/add_product') }}">Add Product</a></li>
 
-                    <a href="{{ url('/add_category') }}">Add Category</a></li>
+                    <li><a href="{{ url('/add_category') }}">Add Category</a></li>
+
+                    <li><a href="{{ url('/add_writer') }}">Add Writer</a></li>
 
                 </ul>
 

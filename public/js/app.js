@@ -2,6 +2,8 @@
 
 	$('#edit_category').modal('hide');
 
+	$('#edit_writer').modal('hide');
+
 
 	var productManager = {
 
@@ -17,7 +19,151 @@
 
 			$('.main').on('click','.deleteClass', this.deleteCategory);
 
+			$('.main').on('submit','.add_writer form[data-remote]', this.saveWriter);
 
+			$('.main').on('submit','#edit_writer form[data-remote]', this.saveEditedwriter);
+
+			$('.main').on('click','.edit_writer', this.editWriter);
+
+			$('.main').on('click','.delete_writer', this.deleteWriter);
+
+
+		},
+
+		deleteWriter: function(e){
+
+			e.preventDefault();
+
+			// alert('hi');
+
+			if (confirm("Do you really want to delete this Writer?")) {
+
+				var clickedWriter = $(this);
+
+				var clickedWriterId = clickedWriter.data('id');
+
+				$.ajax({
+
+					type : "POST",
+
+					url  : "/delete_writer",
+
+					headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+					data : {id : clickedWriterId} 
+				})
+				.done(function(){
+
+					var currentPageUrl = window.location.href;
+
+					$('.writer_list').load(currentPageUrl+' .writer_list');
+				})
+				.fail(function(){
+
+					alert("error");
+
+				});
+			}
+		},
+
+		editWriter: function(e){
+
+			e.preventDefault();
+
+			var clickedWriter = $(this);
+
+			var clickedWriterId = clickedWriter.data('id');
+
+			var clickedWriterName = clickedWriter.data('writer-name');
+
+			$('.writer').val(clickedWriterName);
+
+			$('.writer_id').val(clickedWriterId);
+
+			$('#edit_writer').modal('show');
+
+
+
+		},
+
+		saveEditedwriter: function(e){
+
+			e.preventDefault();
+
+			var WriterId = $('.writer_id').val();
+
+			var WriterName = $('.writer').val();
+
+			// alert(CategoryId);
+
+			$.ajax({
+
+				type : "POST",
+
+				url  : "/save_edited_writer",
+
+				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+				data : {id : WriterId, writer: WriterName} 
+			})
+			.done(function(){
+
+				$('#edit_writer').modal('hide');
+
+				var currentPageUrl = window.location.href;
+
+				$('.writer_list').load(currentPageUrl+' .writer_list');
+
+			})
+			.fail(function(){
+
+				alert("error");
+
+			});
+		},
+
+		saveWriter: function(e){
+
+			e.preventDefault();
+
+			var form = $(this);
+
+			var method = form.find('input[name="_method"]').val() || 'POST';
+
+			var url = form.prop('action');
+
+			var dataString = form.serialize();
+
+			// alert(dataString);
+			
+			$.ajax({
+
+				type : method,
+
+				url  : url,
+
+				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+				data : dataString 
+			})
+			.done(function(){
+
+				form.trigger('reset');
+
+				var message = form.data('remote-success');
+
+				alert(message);
+
+				var currentPageUrl = window.location.href;
+
+				$('.writer_list').load(currentPageUrl+' .writer_list');
+
+			})
+			.fail(function(){
+
+				alert("error");
+
+			});
 		},
 
 		deleteCategory: function(e){
@@ -26,35 +172,35 @@
 
 			// alert('hi');
 
-			if (confirm("Do you really want to delete this Student?")) {
+			if (confirm("Do you really want to delete this Category?")) {
 
-		var clickedcategory = $(this);
+				var clickedcategory = $(this);
 
-		var clickedcategoryId = clickedcategory.data('id');
+				var clickedcategoryId = clickedcategory.data('id');
 
-		$.ajax({
+				$.ajax({
 
-			type : "POST",
+					type : "POST",
 
-			url  : "/deletecategory",
+					url  : "/deletecategory",
 
-			headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+					headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
 
-			data : {id : clickedcategoryId} 
-		})
-		.done(function(){
+					data : {id : clickedcategoryId} 
+				})
+				.done(function(){
 
-			var currentPageUrl = window.location.href;
+					var currentPageUrl = window.location.href;
 
-			$('.category_list').load(currentPageUrl+' .category_list');
+					$('.category_list').load(currentPageUrl+' .category_list');
 
-		})
-		.fail(function(){
+				})
+				.fail(function(){
 
-			alert("error");
+					alert("error");
 
-		});
-	}
+				});
+			}
 		},
 
 		saveEditedCategory: function(e){

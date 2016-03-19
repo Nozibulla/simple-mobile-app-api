@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use App\Writer;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller {
@@ -17,7 +18,9 @@ class ProductController extends Controller {
 
 		$categories = Category::lists('name', 'id');
 
-		return view('welcome', compact('categories'));
+		$writers = Writer::lists('writer', 'id');
+
+		return view('welcome', compact('categories', 'writers'));
 	}
 
 	public function save(Request $request) {
@@ -32,11 +35,11 @@ class ProductController extends Controller {
 
 		$product->book_name = $request->product_name;
 
-		$product->writer = $request->writer;
-
 		$product->book_link = $request->book_link;
 
-		$product->writer_on_linkbar = $this->makeTheTitleLink(strip_tags($request->writer));
+		/*$product->writer = $request->writer;
+
+		$product->writer_on_linkbar = $this->makeTheTitleLink(strip_tags($request->writer));*/
 
 		$product->thumbnail = $destinationPath;
 
@@ -45,6 +48,10 @@ class ProductController extends Controller {
 		$categoryIds = $request->input('category');
 
 		$product->categories()->attach($categoryIds);
+
+		$writerId = $request->input('writer');
+
+		$product->writers()->attach($writerId);
 
 	}
 
@@ -76,6 +83,8 @@ class ProductController extends Controller {
 
 		$category->name = $request->name;
 
+		$category->name_on_linkbar = $this->makeTheTitleLink(strip_tags($request->name));
+
 		$category->save();
 	}
 
@@ -89,11 +98,54 @@ class ProductController extends Controller {
 
 	}
 
+	public function addWriter() {
+
+		$writers = Writer::paginate(20);
+
+		return view('add_writer', compact('writers'));
+
+	}
+
+	public function saveWriter(Request $request) {
+
+		$writer = new Writer;
+
+		$writer->writer = $request->writer;
+
+		$writer->writer_on_linkbar = $this->makeTheTitleLink(strip_tags($request->writer));
+
+		$writer->save();
+
+	}
+
+	public function saveEditedWriter(Request $request) {
+
+		$id = $request->id;
+
+		$writer = Writer::findOrFail($id);
+
+		$writer->writer = $request->writer;
+
+		$writer->writer_on_linkbar = $this->makeTheTitleLink(strip_tags($request->writer));
+
+		$writer->save();
+	}
+
+	public function deleteWriter(Request $request) {
+
+		$id = $request->id;
+
+		$writer = Writer::findOrFail($id);
+
+		$writer->delete();
+
+	}
+
 	public function makeTheTitleLink($link_to_convert) {
 
 		$converted_Link = strtolower($link_to_convert);
 
-		$converted_Link = preg_replace("/[^a-z0-9_\s-]/", "", $converted_Link);
+		$converted_Link = preg_replace("/[^অ-ঁ০-৯a-z0-9_\s-]/", "", $converted_Link);
 
 		$converted_Link = preg_replace("/[\s-]+/", " ", $converted_Link);
 

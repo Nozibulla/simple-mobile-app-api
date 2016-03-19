@@ -18,4 +18,9 @@ class Product extends Model {
 
 		return $this->belongsToMany('App\Category')->withTimestamps();
 	}
+
+	public function writers() {
+
+		return $this->belongsToMany('App\Writer');
+	}
 }

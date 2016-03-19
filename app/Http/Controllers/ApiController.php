@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use App\Writer;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller {
@@ -15,6 +16,7 @@ class ApiController extends Controller {
 		foreach ($products as $product) {
 
 			$categories = $product->categories;
+			$writer = $product->writers;
 
 		}
 
@@ -42,6 +44,19 @@ class ApiController extends Controller {
 		return (compact('categories'));
 	}
 
+	public function writersWithProducts() {
+
+		$writers = Writer::all();
+
+		foreach ($writers as $writer) {
+
+			$products = $writer->products;
+
+		}
+
+		return (compact('writers'));
+	}
+
 	public function productByCategorie(Request $request) {
 
 		$category_name = $request->cat_name;
@@ -57,9 +72,9 @@ class ApiController extends Controller {
 
 	public function writers() {
 
-		$writers = Product::distinct()->pluck('writer', 'writer_on_linkbar');
+		$writers = Writer::all();
 
-		return $writers;
+		return compact('writers');
 
 	}
 
@@ -67,9 +82,13 @@ class ApiController extends Controller {
 
 		$writer = $request->writer_name;
 
-		$products = Product::wherewriter_on_linkbar($writer)->get();
+		$writers = Writer::wherewriter_on_linkbar($writer)->get();
 
-		return $products;
+		foreach ($writers as $writer) {
+
+			return $writer->products;
+
+		}
 	}
 
 }

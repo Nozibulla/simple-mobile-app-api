@@ -17,6 +17,7 @@ Route::get('lara-api/category/{cat_name}', 'ApiController@productByCategorie');
 Route::get('lara-api/writers', 'ApiController@writers');
 Route::get('lara-api/writer/{writer_name}', 'ApiController@productsByWriter');
 Route::get('lara-api/categorieswithproducts', 'ApiController@categoriesWithProducts');
+Route::get('lara-api/writerswithproducts', 'ApiController@writersWithProducts');
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('/save_category', 'ProductController@saveCategory');
 	Route::post('/save_edited_category', 'ProductController@saveEditedCategory');
 	Route::post('/deletecategory', 'ProductController@deleteCategory');
+	Route::get('/add_writer', 'ProductController@addWriter');
+	Route::post('/save_writer', 'ProductController@saveWriter');
+	Route::post('/save_edited_writer', 'ProductController@saveEditedWriter');
+	Route::post('/delete_writer', 'ProductController@deleteWriter');
 });

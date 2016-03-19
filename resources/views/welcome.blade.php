@@ -21,8 +21,8 @@
                             </div>
 
                             <div class="form-group @if($errors->first('writer')) has-error @endif">
-                                {!! Form::label('writer', 'Writer Name') !!}
-                                {!! Form::text('writer', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                                {!! Form::label('writer', 'Select Writer Name') !!}
+                                {!! Form::select('writer', $writers, null, ['id' => 'writer', 'class' => 'form-control', 'required' => 'required']) !!}
                                 <small class="text-danger">{{ $errors->first('writer') }}</small>
                             </div>
 
