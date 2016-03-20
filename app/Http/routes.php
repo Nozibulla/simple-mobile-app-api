@@ -38,6 +38,7 @@ Route::group(['middleware' => 'web'], function () {
 	});
 
 	Route::get('/home', 'HomeController@index');
+	Route::get('/book_list', 'ProductController@showBooks');
 	Route::post('/save_product', 'ProductController@save');
 	Route::get('/add_product', 'ProductController@addProduct');
 	Route::get('/add_category', 'ProductController@addCategory');
@@ -48,4 +49,5 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('/save_writer', 'ProductController@saveWriter');
 	Route::post('/save_edited_writer', 'ProductController@saveEditedWriter');
 	Route::post('/delete_writer', 'ProductController@deleteWriter');
+	Route::post('/delete_book', 'ProductController@deleteBook');
 });

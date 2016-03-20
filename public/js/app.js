@@ -27,8 +27,47 @@
 
 			$('.main').on('click','.delete_writer', this.deleteWriter);
 
+			$('.main').on('click','.deletebook', this.deleteBook);
+
 
 		},
+
+		deleteBook: function(e){
+
+			e.preventDefault();
+
+			// alert('hi');
+
+			if (confirm("Do you really want to delete this Book?")) {
+
+				var clickedBook = $(this);
+
+				var clickedBookId = clickedBook.data('id');
+
+				$.ajax({
+
+					type : "POST",
+
+					url  : "/delete_book",
+
+					headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+
+					data : {id : clickedBookId} 
+				})
+				.done(function(){
+
+					var currentPageUrl = window.location.href;
+
+					$('.book_list').load(currentPageUrl+' .book_list');
+				})
+				.fail(function(){
+
+					alert("error");
+
+				});
+			}
+		},
+
 
 		deleteWriter: function(e){
 

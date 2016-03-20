@@ -14,6 +14,20 @@ class ProductController extends Controller {
 		$this->middleware('auth');
 	}
 
+	public function showBooks() {
+
+		$products = Product::paginate(50);
+
+		foreach ($products as $product) {
+
+			$categories = $product->categories;
+			$writer = $product->writers;
+
+		}
+
+		return view('books_list', compact('products'));
+	}
+
 	public function addProduct() {
 
 		$categories = Category::lists('name', 'id');
@@ -141,11 +155,20 @@ class ProductController extends Controller {
 
 	}
 
+	public function deleteBook(Request $request) {
+
+		$id = $request->id;
+
+		$book = Product::findOrFail($id);
+
+		$book->delete();
+	}
+
 	public function makeTheTitleLink($link_to_convert) {
 
 		$converted_Link = strtolower($link_to_convert);
 
-		$converted_Link = preg_replace("/[^অ-ঁ০-৯a-z0-9_\s-]/", "", $converted_Link);
+		$converted_Link = preg_replace("/[^অ-ঁ০-৯ীূৃa-z0-9_\s-]/", "", $converted_Link);
 
 		$converted_Link = preg_replace("/[\s-]+/", " ", $converted_Link);
 

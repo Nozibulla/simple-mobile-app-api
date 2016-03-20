@@ -52,7 +52,9 @@
 
                     <li><a href="{{ url('/home') }}">DashBoard</a></li>
 
-                    <li><a href="{{ url('/add_product') }}">Add Product</a></li>
+                    <li><a href="{{ url('/add_product') }}">Add book</a></li>
+
+                    <li><a href="{{ url('/book_list') }}">Book List</a></li>
 
                     <li><a href="{{ url('/add_category') }}">Add Category</a></li>
 
