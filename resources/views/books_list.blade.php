@@ -48,7 +48,7 @@
 
 							<td >
 
-								<a href="#" class="editbook" data-id="{{ $product->id }}" data-product-name="{{ $product->book_name }}" >
+								<a href="/edit_product/{{ $product->id }}" class="editbook" data-id="{{ $product->id }}" data-product-name="{{ $product->book_name }}" >
 									Edit
 
 								</a>

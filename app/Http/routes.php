@@ -50,4 +50,6 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('/save_edited_writer', 'ProductController@saveEditedWriter');
 	Route::post('/delete_writer', 'ProductController@deleteWriter');
 	Route::post('/delete_book', 'ProductController@deleteBook');
+	Route::get('/edit_product/{id}', 'ProductController@editProduct');
+	Route::patch('/update_product', 'ProductController@updateProduct');
 });

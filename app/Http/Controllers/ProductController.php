@@ -47,7 +47,7 @@ class ProductController extends Controller {
 
 		$product = new Product;
 
-		$product->book_name = $request->product_name;
+		$product->book_name = $request->book_name;
 
 		$product->book_link = $request->book_link;
 
@@ -162,6 +162,17 @@ class ProductController extends Controller {
 		$book = Product::findOrFail($id);
 
 		$book->delete();
+	}
+
+	public function editProduct($id) {
+
+		$book = Product::findOrFail($id);
+
+		$categories = Category::lists('name', 'id');
+
+		$writers = Writer::lists('writer', 'id');
+
+		return view('edit_book', compact('book', 'categories', 'writers'));
 	}
 
 	public function makeTheTitleLink($link_to_convert) {
