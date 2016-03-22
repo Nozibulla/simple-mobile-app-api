@@ -16,11 +16,11 @@ class ApiController extends Controller {
 		foreach ($products as $product) {
 
 			$categories = $product->categories;
-			$writer = $product->writers;
+			$writer = $product->writer;
 
 		}
 
-		return (compact('products'));
+		return $products;
 
 	}
 

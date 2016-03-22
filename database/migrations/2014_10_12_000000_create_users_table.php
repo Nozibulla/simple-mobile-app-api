@@ -19,14 +19,6 @@ class CreateUsersTable extends Migration {
 			$table->timestamps();
 		});
 
-		Schema::create('products', function (Blueprint $table) {
-			$table->increments('id');
-			$table->string('book_name');
-			$table->string('book_link');
-			$table->string('thumbnail');
-			$table->timestamps();
-		});
-
 		Schema::create('categories', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
@@ -41,7 +33,17 @@ class CreateUsersTable extends Migration {
 			$table->timestamps();
 		});
 
-		Schema::create('product_writer', function (Blueprint $table) {
+		Schema::create('products', function (Blueprint $table) {
+			$table->increments('id');
+			$table->string('book_name');
+			$table->string('book_link');
+			$table->string('thumbnail');
+			$table->integer('writer_id')->unsigned();
+			$table->foreign('writer_id')->references('id')->on('writers');
+			$table->timestamps();
+		});
+
+		/*Schema::create('product_writer', function (Blueprint $table) {
 
 			$table->integer('writer_id')->unsigned()->index();
 
@@ -52,7 +54,7 @@ class CreateUsersTable extends Migration {
 			$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
 			$table->timestamps();
-		});
+		});*/
 
 		Schema::create('category_product', function (Blueprint $table) {
 
@@ -75,11 +77,12 @@ class CreateUsersTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('users');
-		Schema::drop('products');
-		Schema::drop('categories');
-		Schema::drop('category_product');
-		Schema::drop('writers');
-		Schema::drop('product_writer');
+		DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+		Schema::dropIfExists('users');
+		Schema::dropIfExists('products');
+		Schema::dropIfExists('categories');
+		Schema::dropIfExists('category_product');
+		Schema::dropIfExists('writers');
+		/*Schema::drop('product_writer');*/
 	}
 }

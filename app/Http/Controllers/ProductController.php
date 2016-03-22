@@ -51,6 +51,8 @@ class ProductController extends Controller {
 
 		$product->book_link = $request->book_link;
 
+		$product->writer_id = $request->input('writer');
+
 		/*$product->writer = $request->writer;
 
 		$product->writer_on_linkbar = $this->makeTheTitleLink(strip_tags($request->writer));*/
@@ -62,10 +64,6 @@ class ProductController extends Controller {
 		$categoryIds = $request->input('category');
 
 		$product->categories()->attach($categoryIds);
-
-		$writerId = $request->input('writer');
-
-		$product->writers()->attach($writerId);
 
 	}
 
@@ -173,6 +171,37 @@ class ProductController extends Controller {
 		$writers = Writer::lists('writer', 'id');
 
 		return view('edit_book', compact('book', 'categories', 'writers'));
+	}
+
+	public function updateProduct($id, Request $request) {
+
+		$product = Product::findOrFail($id);
+
+		if ($request->thumbnail) {
+
+			$name = $request->thumbnail->getClientOriginalName();
+
+			$request->thumbnail->move('thumbnail-image', $name);
+
+			$destinationPath = 'http://eboimela.optimumccl.com/thumbnail-image/' . $name;
+
+			$product->thumbnail = $destinationPath;
+		}
+
+		$product->book_name = $request->book_name;
+
+		$product->book_link = $request->book_link;
+
+		$product->writer_id = $request->input('writer');
+
+		$product->update();
+
+		$categoryIds = $request->input('category_list');
+
+		$product->categories()->sync($categoryIds);
+
+		return redirect('book_list');
+
 	}
 
 	public function makeTheTitleLink($link_to_convert) {

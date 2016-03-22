@@ -13,7 +13,7 @@
 
                         <div class="add_product">
 
-                            {!! Form::model($book, ['action'=>['ProductController@updateProduct', $book->id ], 'method'=> 'PATCH', 'class' => 'form-horizontal']) !!}
+                            {!! Form::model($book, ['action'=>['ProductController@updateProduct', $book->id ], 'method'=> 'PATCH', 'class' => 'form-horizontal', 'files' => true]) !!}
 
                             <div class="form-group @if($errors->first('book_name')) has-error @endif">
                                 {!! Form::label('book_name', 'Product Name') !!}
@@ -23,7 +23,7 @@
 
                             <div class="form-group @if($errors->first('writer')) has-error @endif">
                                 {!! Form::label('writer', 'Select Writer Name') !!}
-                                {!! Form::select('writer', $writers, null, ['id' => 'writer', 'class' => 'form-control', 'required' => 'required']) !!}
+                                {!! Form::select('writer', $writers, $book->writer_id, ['id' => 'writer', 'class' => 'form-control', 'required' => 'required']) !!}
                                 <small class="text-danger">{{ $errors->first('writer') }}</small>
                             </div>
 
@@ -41,7 +41,7 @@
 
                             <div class="form-group @if($errors->first('thumbnail')) has-error @endif">
                                 {!! Form::label('thumbnail', 'Book Thumbnail') !!}
-                                {!! Form::file('thumbnail', ['required' => 'required']) !!}
+                                {!! Form::file('thumbnail') !!}
                                 <small class="text-danger">{{ $errors->first('thumbnail') }}</small>
                             </div>
 

@@ -10,6 +10,7 @@ class Product extends Model {
 		'book_name',
 		'writer',
 		'book_link',
+		'writer_id',
 		'category',
 		'thumbnail',
 	];
@@ -21,11 +22,11 @@ class Product extends Model {
 
 	public function getCategoryListAttribute() {
 
-		return $this->categories->lists('id');
+		return $this->categories->lists('id')->toArray();
 	}
 
-	public function writers() {
+	public function writer() {
 
-		return $this->belongsToMany('App\Writer');
+		return $this->belongsTo('App\Writer');
 	}
 }
