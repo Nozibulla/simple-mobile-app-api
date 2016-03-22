@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-            <h1>In Maintenance Mode Come back later</h1>
-            <div class="panel-heading"> This section still not done yet! Work on progress </div>
+            <div class="panel-heading">Edit Book </div>
 
                 <div class="panel-body">
-                    <div class="main col-lg-6 col-md-offset-3">
+
+                    <div class="main col-lg-6 col-lg-offset-3">
 
                         <div class="add_product">
 
@@ -39,10 +39,14 @@
                                 <small class="text-danger">{{ $errors->first('category') }}</small>
                             </div>
 
+
+
                             <div class="form-group @if($errors->first('thumbnail')) has-error @endif">
                                 {!! Form::label('thumbnail', 'Book Thumbnail') !!}
                                 {!! Form::file('thumbnail') !!}
                                 <small class="text-danger">{{ $errors->first('thumbnail') }}</small>
+                                <br />
+                                {{  Html::image($book->thumbnail,'Image not found', array( 'width' => 70, 'height' => 70 )) }}
                             </div>
 
                             <div class="btn-group pull-right">
