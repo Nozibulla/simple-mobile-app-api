@@ -1,6 +1,7 @@
 /vendor
 /node_modules
 /public/thumbnail-image
+/public/uploaded-book
 Homestead.yaml
 Homestead.json
 .env

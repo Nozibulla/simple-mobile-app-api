@@ -34,30 +34,32 @@ class ProductController extends Controller {
 
 		$writers = Writer::lists('writer', 'id');
 
-		return view('welcome', compact('categories', 'writers'));
+		return view('add_book', compact('categories', 'writers'));
 	}
 
 	public function save(Request $request) {
 
-		$name = $request->thumbnail->getClientOriginalName();
+		$book = $request->book->getClientOriginalName();
 
-		$request->thumbnail->move('thumbnail-image', $name);
+		$request->book->move('uploaded-book', $book);
 
-		$destinationPath = 'http://eboimela.optimumccl.com/thumbnail-image/' . $name;
+		$thumbnailimage = $request->thumbnail->getClientOriginalName();
+
+		$request->thumbnail->move('thumbnail-image', $thumbnailimage);
+
+		$thumbnailPath = 'http://eboimela.optimumccl.com/thumbnail-image/' . $thumbnailimage;
+
+		$bookPath = 'http://eboimela.optimumccl.com/uploaded-book/' . $book;
 
 		$product = new Product;
 
 		$product->book_name = $request->book_name;
 
-		$product->book_link = $request->book_link;
+		$product->book_link = $bookPath;
 
 		$product->writer_id = $request->input('writer');
 
-		/*$product->writer = $request->writer;
-
-		$product->writer_on_linkbar = $this->makeTheTitleLink(strip_tags($request->writer));*/
-
-		$product->thumbnail = $destinationPath;
+		$product->thumbnail = $thumbnailPath;
 
 		$product->save();
 

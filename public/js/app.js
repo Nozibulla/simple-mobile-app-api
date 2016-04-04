@@ -358,8 +358,37 @@
 			var url = form.prop('action');
 
 			var dataString = new FormData(this);
+
+			var bar = $('.progress-bar');
+
+			$('.progress').show();
 			
 			$.ajax({
+
+				xhr: function() {
+
+					var percentComplete= 0;
+
+					var xhr = new window.XMLHttpRequest();
+
+					xhr.upload.addEventListener("progress", function(evt) {
+
+						if (evt.lengthComputable) {
+
+							var percentComplete = evt.loaded / evt.total;
+
+							percentComplete = parseInt(percentComplete * 100);
+
+							bar.width(percentComplete+ '%');
+
+							bar.html('Completed ' + percentComplete + '%');
+
+
+						}
+					}, false);
+
+					return xhr;
+				},
 
 				type : method,
 
@@ -371,16 +400,12 @@
 
 				data : dataString,
 
-
 			})
 			.done(function(){
 
-				form.trigger('reset');
+				var currentPageUrl = window.location.href;
 
-				var message = form.data('remote-success');
-
-				alert(message);
-
+				$('body').load(currentPageUrl);
 
 			})
 			.fail(function(){

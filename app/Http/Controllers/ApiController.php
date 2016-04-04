@@ -20,7 +20,7 @@ class ApiController extends Controller {
 
 		}
 
-		return $products;
+		return (compact('products'));
 
 	}
 
@@ -65,7 +65,9 @@ class ApiController extends Controller {
 
 		foreach ($categories as $category) {
 
-			return $category->products;
+			$products = $category->products;
+
+			return compact('products');
 
 		}
 	}
@@ -86,7 +88,9 @@ class ApiController extends Controller {
 
 		foreach ($writers as $writer) {
 
-			return $writer->products;
+			$products = $writer->products;
+
+			return compact('products');
 
 		}
 	}
