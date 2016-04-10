@@ -99,19 +99,32 @@ class ApiController extends Controller {
 
 	public function userSignUP(Request $request) {
 
-		$enduser = new Enduser;
+		$username = $request->username;
 
-		$enduser->username = $request->username;
+		$email = $request->email;
 
-		$enduser->email = $request->email;
+		$mobile = $request->mobile;
 
-		$enduser->mobile = $request->mobile;
+		$pass = bcrypt($request->pass);
 
-		$enduser->pass = bcrypt($request->pass);
+		if ($username && $email && $mobile && $pass) {
 
-		$enduser->save();
+			$enduser = new Enduser;
 
-		return 'saved';
+			$enduser->username = $username;
+
+			$enduser->email = $email;
+
+			$enduser->mobile = $mobile;
+
+			$enduser->pass = $pass;
+
+			$enduser->save();
+
+			return 'saved';
+		} else {
+			return 'Cheating Huh!';
+		}
 
 	}
 
