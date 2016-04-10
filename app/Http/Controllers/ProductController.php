@@ -47,9 +47,9 @@ class ProductController extends Controller {
 
 		$request->thumbnail->move('thumbnail-image', $thumbnailimage);
 
-		$thumbnailPath = 'http://eboimela.optimumccl.com/thumbnail-image/' . $thumbnailimage;
+		$thumbnailPath = 'http://eboimelaapi.eboimelabd.com/thumbnail-image/' . $thumbnailimage;
 
-		$bookPath = 'http://eboimela.optimumccl.com/uploaded-book/' . $book;
+		$bookPath = 'http://eboimelaapi.eboimelabd.com/uploaded-book/' . $book;
 
 		$product = new Product;
 
@@ -185,7 +185,7 @@ class ProductController extends Controller {
 
 			$request->thumbnail->move('thumbnail-image', $name);
 
-			$destinationPath = 'http://eboimela.optimumccl.com/thumbnail-image/' . $name;
+			$destinationPath = 'http://eboimelaapi.eboimelabd.com/thumbnail-image/' . $name;
 
 			$product->thumbnail = $destinationPath;
 		}

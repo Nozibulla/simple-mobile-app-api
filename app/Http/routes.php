@@ -18,6 +18,8 @@ Route::get('lara-api/writers', 'ApiController@writers');
 Route::get('lara-api/writer/{writer_name}', 'ApiController@productsByWriter');
 Route::get('lara-api/categorieswithproducts', 'ApiController@categoriesWithProducts');
 Route::get('lara-api/writerswithproducts', 'ApiController@writersWithProducts');
+Route::get('lara-api/user/signup', 'ApiController@userSignUP');
+Route::get('lara-api/user/login', 'ApiController@userLogin');
 
 /*
 |--------------------------------------------------------------------------

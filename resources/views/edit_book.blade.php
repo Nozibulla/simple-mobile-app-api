@@ -39,6 +39,12 @@
                                 <small class="text-danger">{{ $errors->first('category') }}</small>
                             </div>
 
+                            <div class="form-group @if($errors->first('thumbnail')) has-error @endif">
+                                {!! Form::label('thumbnail', 'Thumbnail Image Link') !!}
+                                {!! Form::text('thumbnail', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                                <small class="text-danger">{{ $errors->first('thumbnail') }}</small>
+                            </div>
+
 
 
                             <div class="form-group @if($errors->first('thumbnail')) has-error @endif">
@@ -50,7 +56,7 @@
                             </div>
 
                             <div class="btn-group pull-right">
-                                {!! Form::submit("Insert", ['class' => 'btn btn-success']) !!}
+                                {!! Form::submit("Update", ['class' => 'btn btn-success']) !!}
                             </div>
 
                             {!! Form::close() !!}

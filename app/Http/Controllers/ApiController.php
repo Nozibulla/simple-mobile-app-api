@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Enduser;
 use App\Product;
 use App\Writer;
+use Hash;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller {
@@ -93,6 +95,55 @@ class ApiController extends Controller {
 			return compact('products');
 
 		}
+	}
+
+	public function userSignUP(Request $request) {
+
+		$enduser = new Enduser;
+
+		$enduser->username = $request->username;
+
+		$enduser->email = $request->email;
+
+		$enduser->mobile = $request->mobile;
+
+		$enduser->pass = bcrypt($request->pass);
+
+		$enduser->save();
+
+		return 'saved';
+
+	}
+
+	public function userLogin(Request $request) {
+
+		$username = $request->username;
+
+		$pass = $request->pass;
+
+		$endusers = Enduser::where('username', '=', $username)->get();
+
+		if ($endusers->first()) {
+
+			foreach ($endusers as $enduser) {
+
+				$hashedPass = $enduser->pass;
+			}
+
+			if (Hash::check($pass, $hashedPass)) {
+
+				return 'Login successful';
+
+			} else {
+
+				return 'Wrong password';
+			}
+
+		} else {
+
+			return 'wrong username';
+		}
+
 	}
 
 }
