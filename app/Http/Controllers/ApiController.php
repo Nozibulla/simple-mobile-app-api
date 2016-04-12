@@ -121,9 +121,15 @@ class ApiController extends Controller {
 
 			$enduser->save();
 
-			return 'saved';
+			$login['status'] = true;
+
+			return $login;
+
 		} else {
-			return 'Cheating Huh!';
+
+			$login['status'] = false;
+
+			return $login;
 		}
 
 	}
@@ -145,16 +151,22 @@ class ApiController extends Controller {
 
 			if (Hash::check($pass, $hashedPass)) {
 
-				return 'Login successful';
+				$login['status'] = true;
+
+				return $login;
 
 			} else {
 
-				return 'Wrong password';
+				$login['status'] = 'Wrong password';
+
+				return $login;
 			}
 
 		} else {
 
-			return 'wrong username';
+			$login['status'] = 'Wrong Username';
+
+			return $login;
 		}
 
 	}

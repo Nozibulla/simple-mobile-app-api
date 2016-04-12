@@ -39,13 +39,17 @@
                                 <small class="text-danger">{{ $errors->first('category') }}</small>
                             </div>
 
-                            <div class="form-group @if($errors->first('thumbnail')) has-error @endif">
-                                {!! Form::label('thumbnail', 'Thumbnail Image Link') !!}
-                                {!! Form::text('thumbnail', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                                <small class="text-danger">{{ $errors->first('thumbnail') }}</small>
+                            <div class="form-group @if($errors->first('thumbnail-image')) has-error @endif">
+                                {!! Form::label('thumbnail-image', 'Thumbnail-image Image Link') !!}
+                                {!! Form::text('thumbnail-image', $book->thumbnail, ['class' => 'form-control', 'required' => 'required']) !!}
+                                <small class="text-danger">{{ $errors->first('thumbnail-image') }}</small>
                             </div>
 
-
+                            <div class="form-group @if($errors->first('book')) has-error @endif">
+                                {!! Form::label('book', 'Upload Book') !!}
+                                {!! Form::file('book', ['required' => 'required']) !!}
+                                <small class="text-danger">{{ $errors->first('book') }}</small>
+                            </div>
 
                             <div class="form-group @if($errors->first('thumbnail')) has-error @endif">
                                 {!! Form::label('thumbnail', 'Book Thumbnail') !!}

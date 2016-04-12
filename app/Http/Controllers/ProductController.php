@@ -179,6 +179,17 @@ class ProductController extends Controller {
 
 		$product = Product::findOrFail($id);
 
+		if ($request->book) {
+
+			$book = $request->book->getClientOriginalName();
+
+			$request->book->move('uploaded-book', $book);
+
+			$bookPath = 'http://eboimelaapi.eboimelabd.com/uploaded-book/' . $book;
+
+			$product->book_link = $bookPath;
+		}
+
 		if ($request->thumbnail) {
 
 			$name = $request->thumbnail->getClientOriginalName();
@@ -192,7 +203,7 @@ class ProductController extends Controller {
 
 		$product->book_name = $request->book_name;
 
-		$product->book_link = $request->book_link;
+		// $product->book_link = $request->book_link;
 
 		$product->writer_id = $request->input('writer');
 
