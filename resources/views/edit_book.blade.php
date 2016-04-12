@@ -47,7 +47,7 @@
 
                             <div class="form-group @if($errors->first('book')) has-error @endif">
                                 {!! Form::label('book', 'Upload Book') !!}
-                                {!! Form::file('book', ['required' => 'required']) !!}
+                                {!! Form::file('book') !!}
                                 <small class="text-danger">{{ $errors->first('book') }}</small>
                             </div>
 
