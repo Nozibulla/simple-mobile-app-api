@@ -18,18 +18,7 @@ class ProductController extends Controller {
 
 		$products = Product::all();
 
-		foreach ($products as $product) {
-
-			$categories = $product->categories;
-			$writer = $product->writer;
-
-			// return $writer;
-
-		}
-
-		// return $writer;
-
-		return view('books_list', compact('products', 'categories', 'writer'));
+		return view('books_list', compact('products'));
 	}
 
 	public function addProduct() {
