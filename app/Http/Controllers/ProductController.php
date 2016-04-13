@@ -16,16 +16,20 @@ class ProductController extends Controller {
 
 	public function showBooks() {
 
-		$products = Product::paginate(50);
+		$products = Product::all();
 
 		foreach ($products as $product) {
 
 			$categories = $product->categories;
-			$writer = $product->writers;
+			$writer = $product->writer;
+
+			// return $writer;
 
 		}
 
-		return view('books_list', compact('products'));
+		// return $writer;
+
+		return view('books_list', compact('products', 'categories', 'writer'));
 	}
 
 	public function addProduct() {
