@@ -44,9 +44,9 @@
 
 							<td>{{ $product->book_name }}</td>
 
-							<td>@for ($x = 0; $x < count($product->categories); $x++){{ $product->categories[$x]['name'] }}, @endfor</td>
+							<td>@foreach ($product->categories as $category){{ $category['name'] }},  @endforeach</td>
 
-							<td>{{ $product->writer->writer }}</td>
+							<td>{{ $product->writer['writer'] }}</td>
 
 							<td >
 

@@ -18,6 +18,16 @@ class ProductController extends Controller {
 
 		$products = Product::all();
 
+		// foreach ($products as $product) {
+
+		// 	$categories = $product->categories;
+
+		// 	$writer = $product->writer;
+
+		// }
+
+		// return $products;
+
 		return view('books_list', compact('products'));
 	}
 
