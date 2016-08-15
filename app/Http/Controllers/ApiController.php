@@ -13,7 +13,7 @@ class ApiController extends Controller {
 
 	public function products() {
 
-		$products = Product::all();
+		$products = Product::take(30)->orderBy('id','desc')->get();
 
 		foreach ($products as $product) {
 

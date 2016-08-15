@@ -16,7 +16,7 @@ class ProductController extends Controller {
 
 	public function showBooks() {
 
-		$products = Product::all();
+		$products = Product::orderBy('id','desc')->get();
 
 		// foreach ($products as $product) {
 

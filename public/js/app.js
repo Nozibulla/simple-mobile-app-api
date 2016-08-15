@@ -209,8 +209,6 @@
 
 			e.preventDefault();
 
-			// alert('hi');
-
 			if (confirm("Do you really want to delete this Category?")) {
 
 				var clickedcategory = $(this);
